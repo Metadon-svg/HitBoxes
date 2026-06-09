@@ -5,8 +5,8 @@
 #include <GLES3/gl3.h>
 
 // Подключаем ImGui и его OpenGL3 бэкенд
-#include "imgui.h"
-#include "imgui_impl_opengl3.h"
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_opengl3.h"
 #include "Utils.h"
 
 using namespace std;
