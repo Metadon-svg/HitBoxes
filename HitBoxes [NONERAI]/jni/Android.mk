@@ -11,14 +11,19 @@ LOCAL_CPPFLAGS += -Wno-format-security -fvisibility=hidden -ffunction-sections -
 LOCAL_CPPFLAGS += -fno-rtti -fexceptions -fpermissive -Oz -std=c++17
 LOCAL_CPPFLAGS += -Wno-c++17-narrowing -fms-extensions -DNDEBUG
 
-LOCAL_LDFLAGS += -Wl,--gc-sections -Wl,--strip-all -llog
+LOCAL_LDFLAGS += -Wl,--gc-sections -Wl,--strip-all -llog -lGLESv3 -lEGL
 
+# Собираем все файлы исходного кода из корня, KittyMemory и новой папки imgui
 FILE_LIST := $(wildcard $(LOCAL_PATH)/*.cpp)
 FILE_LIST += $(wildcard $(LOCAL_PATH)/*.c)
 FILE_LIST += $(wildcard $(LOCAL_PATH)/KittyMemory/*.cpp)
+FILE_LIST += $(wildcard $(LOCAL_PATH)/imgui/*.cpp)
 
-LOCAL_C_INCLUDES += $(wildcard $(LOCAL_PATH)/)
-LOCAL_C_INCLUDES += $(wildcard $(LOCAL_PATH)/KittyMemory/)
+# Указываем компилятору, где искать заголовочные (.h) файлы
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/KittyMemory/
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/imgui/
+
 LOCAL_SRC_FILES := $(FILE_LIST:$(LOCAL_PATH)/%=%)
 
 include $(BUILD_SHARED_LIBRARY)
